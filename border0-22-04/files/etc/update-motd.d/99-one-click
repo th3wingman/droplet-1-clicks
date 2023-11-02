@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# Configured as part of the DigitalOcean 1-Click Image build process
+
+# Read in the passwords....
+
+myip=$(hostname -I | awk '{print$1}')
+cat <<EOF
+********************************************************************************
+
+Welcome to DigitalOcean's 1-Click Border0 Droplet.
+To keep this Droplet secure, the UFW firewall is enabled.
+All ports are BLOCKED except 22 (SSH)
+
+Border0 Connector Install Script, type in the cli:
+
+border0-install.sh
+
+This will install border0 Conenctor service on this system.
+Second step is enabling Digital-Ocean Plugin and initializing doctl toolset.
+
+NOTE: Consider using DO read-only token for security
+
+********************************************************************************
+To delete this message of the day: rm -rf $(readlink -f ${0})
+EOF
