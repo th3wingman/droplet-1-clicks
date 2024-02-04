@@ -2,8 +2,39 @@
 #
 # Configured as part of the DigitalOcean 1-Click Image build process
 
-# Read in the passwords....
+if [ -d /etc/border0 ]; then
 
+
+# Define the service name
+serviceName="border0.service"
+
+# Check if the service unit file exists in the systemd system directory or local configuration
+if [ -f /etc/systemd/system/${serviceName} ] || [ -f /lib/systemd/system/${serviceName} ] || [ -f /usr/lib/systemd/system/${serviceName} ]; then
+    B0_STATUS="service is installed.\nUse 'systemctl status border0' for details."
+else
+    B0_STATUS="service is not installed, but some configs are present...\nIncomplete install? Use 'border0-install.sh' to install the service."
+fi
+
+myip=$(hostname -I | awk '{print$1}')
+cat <<EOF
+********************************************************************************
+
+Welcome to DigitalOcean's 1-Click Border0 Droplet.
+To keep this Droplet secure, the UFW firewall is enabled.
+All ports are BLOCKED except 22 (SSH)
+
+Border0 Connector $(echo -e $B0_STATUS)
+
+Please navigate to the Admin portal for further configuration and management
+
+https://portal.border0.com
+
+********************************************************************************
+To delete this message of the day: rm -rf $(readlink -f ${0})
+EOF
+
+else
+# looks like this is fresh 1-c droplet
 myip=$(hostname -I | awk '{print$1}')
 cat <<EOF
 ********************************************************************************
@@ -14,7 +45,7 @@ All ports are BLOCKED except 22 (SSH)
 
 Border0 Connector Install Script, type in the cli:
 
-border0-install.sh
+We will execute border0-install.sh wizard script for you
 
 This will install border0 Conenctor service on this system.
 Second step is enabling Digital-Ocean Plugin and initializing doctl toolset.
@@ -24,3 +55,5 @@ NOTE: Consider using DO read-only token for security
 ********************************************************************************
 To delete this message of the day: rm -rf $(readlink -f ${0})
 EOF
+
+fi
