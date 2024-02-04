@@ -8,3 +8,9 @@ apt-get -y install border0
 
 chmod +x /sbin/border0-install.sh
 #
+
+# this is required bot 999-img_check.sh to pass
+apt-get -y purge droplet-agent
+apt-get -y purge do-agent
+rm -fr /opt/digitalocean
+## end of 010-border0.sh
