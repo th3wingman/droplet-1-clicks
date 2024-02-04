@@ -13,4 +13,9 @@ chmod +x /sbin/border0-install.sh
 apt-get -y purge droplet-agent
 apt-get -y purge do-agent
 rm -fr /opt/digitalocean
+
+# clean up log files
+rm -frv /var/log/ubuntu-advantage.log
+rm -frv /var/log/kern.log
+rm -frv /var/log/auth.log
 ## end of 010-border0.sh
