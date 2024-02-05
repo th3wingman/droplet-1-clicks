@@ -13,7 +13,7 @@
       "type": "digitalocean",
       "api_token": "{{user `do_api_token`}}",
       "image": "ubuntu-22-04-x64",
-      "region": "tor1",
+      "region": "syd1",
       "size": "s-1vcpu-1gb",
       "tags": ["1-click","rnd","packer","border0"],
       "ssh_username": "root",

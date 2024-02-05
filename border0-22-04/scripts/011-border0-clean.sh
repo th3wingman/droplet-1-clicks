@@ -13,6 +13,7 @@ rm -frv /etc/update-motd.d/90-updates-available
 
 # clean up log files
 rm -frv /var/log/ubuntu-advantage.log
+ln -s /dev/null /var/log/ubuntu-advantage.log
 rm -frv /var/log/kern.log
 rm -frv /var/log/auth.log
 

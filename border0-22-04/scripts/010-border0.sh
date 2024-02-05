@@ -14,15 +14,10 @@ chmod +x /sbin/border0-install.sh
 
 # 
 # Additional check for /etc/border0 directory and update /root/.bashrc
-bashrcLine="if [ -d /etc/border0 ]; then echo /sbin/border0-install.sh has already been executed; else /sbin/border0-install.sh; fi"
-if [ -d /etc/border0 ]; then
-    # Check if line already exists in /root/.bashrc to avoid duplicate entries
-    if ! grep -qxF -- "$bashrcLine" /root/.bashrc; then
-        echo "$bashrcLine" >> /root/.bashrc
-        echo "Check for /etc/border0 added to /root/.bashrc."
-    else
-        echo "Check for /etc/border0 already exists in /root/.bashrc."
-    fi
+bashrcLine="if [ -f /etc/border0/border0.yaml ]; then echo -e '\nDocs and support: https://docs.border0.com/docs/getting-help\n' ; else /sbin/border0-install.sh; fi"
+# Check if line already exists in /root/.bashrc to avoid duplicate entries
+if ! grep -qxF -- "$bashrcLine" /root/.bashrc; then
+    echo "$bashrcLine" >> /root/.bashrc
 fi
 #
 ## end of 010-border0.sh
